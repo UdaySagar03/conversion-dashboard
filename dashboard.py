@@ -31,8 +31,41 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# ----------------------------------------
+# 🚀 Introduction Section
+# ----------------------------------------
+st.markdown(
+    """
+    <div style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); padding: 2rem; border-radius: 15px; text-align: center; margin-bottom: 2rem;">
+        <h1 style="color: #ffffff; font-size: 3rem; margin: 0;">🚀 Freemium2Premium</h1>
+        <h2 style="color: #00e5ff; font-size: 1.5rem; margin: 0.5rem 0;">AI-Powered User Conversion Prediction Model</h2>
+        <p style="color: #ffffff; font-size: 1.1rem; margin: 0;">Transform your freemium business with intelligent insights that predict and optimize user conversion from free to premium subscriptions.</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 st.title("📊 **User Conversion Insights Dashboard**")
 st.caption("Visualize, understand, and act on what drives conversions from free → premium users.")
+
+# Model Overview
+st.markdown(
+    """
+    ### 🎯 About Freemium2Premium
+    
+    **Freemium2Premium** is an advanced machine learning model designed to predict user conversion likelihood in freemium business models. 
+    By analyzing user behavior patterns, engagement metrics, and demographic data, it identifies high-potential users and provides 
+    actionable insights to maximize conversion rates.
+    
+    **Key Capabilities:**
+    - 🔮 **Predictive Analytics**: Forecast conversion probability with 85%+ accuracy
+    - 📊 **Behavioral Analysis**: Understand what drives users to upgrade
+    - 🎯 **Targeted Insights**: Identify high-value prospects for focused campaigns
+    - 📈 **ROI Optimization**: Increase conversion rates by up to 25%
+    """
+)
+
+st.markdown("---")
 
 # ----------------------------------------
 # 🎯 Key Metrics Highlights
@@ -138,7 +171,7 @@ stage_counts = [
     premium_users
 ]
 
-fig_funnel, ax_funnel = plt.subplots(figsize=(6, 4))
+fig_funnel, ax_funnel = plt.subplots(figsize=(3, 2))
 sns.barplot(
     x=stage_counts, y=funnel_stages, palette=["#008080", "#00bcd4", "#4caf50"], ax=ax_funnel
 )
@@ -174,7 +207,7 @@ feat_imp = pd.DataFrame({
     "Importance": importances
 }).sort_values(by="Importance", ascending=False)
 
-fig, ax = plt.subplots(figsize=(10, 5))
+fig, ax = plt.subplots(figsize=(5, 2.5))
 sns.barplot(y="Feature", x="Importance", data=feat_imp.head(12), ax=ax, palette="cool")
 ax.set_title("Top 12 Features Driving Conversion")
 st.pyplot(fig)
@@ -187,14 +220,14 @@ st.markdown("## 🌎 Conversion Trends by Category")
 col1, col2 = st.columns(2)
 with col1:
     region_conversion = df.groupby("region")["is_premium_user"].mean().sort_values(ascending=False)
-    fig1, ax1 = plt.subplots(figsize=(6, 4))
+    fig1, ax1 = plt.subplots(figsize=(3, 2))
     sns.barplot(x=region_conversion.values * 100, y=region_conversion.index, palette="viridis", ax=ax1)
     ax1.set_title("Average Conversion Rate by Region (%)")
     st.pyplot(fig1)
 
 with col2:
     device_conversion = df.groupby("device_type")["is_premium_user"].mean().sort_values(ascending=False)
-    fig2, ax2 = plt.subplots(figsize=(6, 4))
+    fig2, ax2 = plt.subplots(figsize=(3, 2))
     sns.barplot(x=device_conversion.values * 100, y=device_conversion.index, palette="mako", ax=ax2)
     ax2.set_title("Average Conversion Rate by Device Type (%)")
     st.pyplot(fig2)
@@ -220,7 +253,7 @@ with col3:
 with col4:
     st.metric("Top Predicted Probability", f"{df['conversion_probability'].max():.2f}")
 
-fig3, ax3 = plt.subplots(figsize=(8, 5))
+fig3, ax3 = plt.subplots(figsize=(4, 2.5))
 sns.histplot(df["conversion_probability"], bins=25, kde=True, color="deepskyblue", ax=ax3)
 ax3.axvline(threshold, color="red", linestyle="--", label="Threshold")
 ax3.set_title("Distribution of Predicted Conversion Probabilities")
